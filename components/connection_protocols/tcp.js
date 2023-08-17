@@ -28,6 +28,7 @@ class TCPConnection extends BaseConnection {
 	constructor(user, chosenServer) {
 		super(user);
 
+		this.maxTimeout = user.options.maxTimeout;
 		this.connectionType = 'TCP';
 		this.sessionKey = null;
 
@@ -121,7 +122,7 @@ class TCPConnection extends BaseConnection {
 
 		this.stream.on('timeout', () => {
 			this._debug('TCP connection timed out');
-			this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
+			this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, this.maxTimeout); // X seconds max
 			this.end(true);
 			this.user._doConnection();
 		});

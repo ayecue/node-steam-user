@@ -22,6 +22,7 @@ class WebSocketConnection extends BaseConnection {
 	constructor(user, chosenServer) {
 		super(user);
 
+		this.maxTimeout = user.options.maxTimeout;
 		this.connectionType = 'WS';
 
 		let addr = chosenServer.endpoint;
@@ -81,7 +82,7 @@ class WebSocketConnection extends BaseConnection {
 
 			this._disconnected = true;
 			this._debug('WS connection timed out');
-			this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, 10000); // 10 seconds max
+			this.user._connectTimeout = Math.min(this.user._connectTimeout * 2, this.maxTimeout); // X seconds max
 			this.stream.disconnect();
 			this.user._doConnection();
 		});
