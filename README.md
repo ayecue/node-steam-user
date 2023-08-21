@@ -328,7 +328,7 @@ Defaults to `false`.
 
 ### maxTimeout
 
-Define a maximum timeout value for requests.
+Set a upper limit on the timeout duration for requests, with the duration specified in milliseconds.
 
 Defaults to `null`.
 

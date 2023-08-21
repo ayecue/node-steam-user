@@ -22,7 +22,7 @@ class WebSocketConnection extends BaseConnection {
 	constructor(user, chosenServer) {
 		super(user);
 
-		this.maxTimeout = user.options.maxTimeout;
+		this.maxTimeout = user.options.maxTimeout || 10000;
 		this.connectionType = 'WS';
 
 		let addr = chosenServer.endpoint;
